@@ -65,9 +65,12 @@ function compress($a, $b, $name){
     // $trimmedPath = trim($relativePath, 'www/');
     // echo '<br>';
     // echo '<strong>'.$trimmedPath.'</strong>';
+    $trimmedPath = trim($filePath, "www.php");
+    $Prod = $trimmedPath."OLD-param.php";
+    $Local = $trimmedPath."app\param.php";
 
     //create a tmp file and put content of param.php in
-    $tmp = tmpfile();
+    $tmp = fopen($trimmedPath.'tmp', 'wb+');
     $path_tmp = stream_get_meta_data($tmp);
     $path_tmp = $path_tmp['uri'];
     
@@ -81,9 +84,6 @@ function compress($a, $b, $name){
     // echo '<br>';
     // echo '<br>';
     //return
-    $trimmedPath = trim($filePath, "www.php");
-    $Prod = $trimmedPath."OLD-param.php";
-    $Local = $trimmedPath."app\param.php";
     echo '<br>';
     echo 'trimmedPath => ' . $trimmedPath;
     echo '<br>';
